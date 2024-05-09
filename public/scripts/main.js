@@ -1,3 +1,8 @@
+import {
+    getNotePad,
+} from './indexedDb.js';
+
+
 //  Este evento se ejecuta cuando la pagina se carga
 window.addEventListener('load', () => {
     registerSW();
@@ -46,3 +51,18 @@ const loadComponents = async () => {
         loadComponent(component, component);
     });
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const notePadName = document.getElementById('notePadName');
+    const createNotePadButton = document.getElementById('createNotePadButton');
+
+    notePadName.addEventListener('input', (event) => {
+        createNotePadButton.disabled = !event.target.value;
+    });
+
+    createNotePadButton.addEventListener('click', () => {
+        notePadName.value = '';
+        getNotePad(notePadName.value.trim());
+    });
+})
