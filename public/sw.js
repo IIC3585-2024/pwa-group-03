@@ -6,6 +6,7 @@ const staticAssets = [
     './',
     './index.html',
     './about.html',
+    './notePads.html',
     './styles.css',
     './scripts/main.js',
     './icons/android-chrome-192x192.png',
