@@ -6,7 +6,8 @@
   "scripts": {
     "build": "postcss ./src/styles.css -o ./public/styles.css",
     "prod": "NODE_ENV=production npm run build",
-    "dev": "concurrently 'postcss tailwind.css -o public/styles.css --watch'  'live-server ./public'"
+    "dev": "concurrently 'postcss tailwind.css -o public/styles.css --watch'  'live-server ./public'",
+    "dev:windows": "concurrently \"postcss tailwind.css -o public/styles.css --watch\" \"live-server ./public\""
   },
   "keywords": [],
   "author": "",
