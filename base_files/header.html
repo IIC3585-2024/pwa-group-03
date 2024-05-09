@@ -1,0 +1,39 @@
+<!-- Menu -->
+<nav id="menu" class="menu">
+    <div id="menu-button" class="menu-button" onclick="toggleMenu();"><i class="fa fa-bars"></i></div>
+    <div id="menu-options" class="menu-options">
+        <ul class="menu-list no-bullet" id="menu-list">
+            <li class="menu-item menu-app"><a href="/" aria-label="App"><span>App</span></a></li>
+            <li class="menu-item menu-about"><a href="/about" aria-label="About"><span>About</span></a></li>
+            <li class="menu-item menu-credits"><a href="/credits" aria-label="Credits"><span>Credits</span></a></li>
+            <li class="menu-item menu-contact"><a href="/contact" aria-label="Contact"><span>Contact</span></a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- Online/Offline Button -->
+<div id="app-header-wrapper">
+    <button id="offline-button" type="button" class="button empty" onclick="setOfflineState('user');">
+        <i class="fa fa-toggle-on"></i>
+        <div id="offline-button-label">
+            <span id="offline-text">Offline</span>
+            <span id="online-text">Online</span>
+        </div>
+    </button>
+</div>
+</header>
+
+<!-- Toolbar -->
+<div id="app-toolbar">
+    <div id="app-toolbar-handle-background"></div>
+    <div id="app-toolbar-handle-wrapper"><button id="app-toolbar-handle" type="button" class="button empty white" onclick="appToolbarToggle();"><i class="fa">+</i></button></div>
+    <div id="app-toolbar-options" class="app-toolbar-options">
+        <span class="uppercase">Status</span>
+        <div id="icon-wrapper">
+            <div id="icon-cloud"><i class="fa fa-cloud-online"></i></div>
+            <div id="icon-database"><i class="fa fa-database"></i></div>
+        </div>
+        <button id="light-dark-modal-button" type="button" class="button empty yellow" onclick="lightDarkModal();"><i class="fa fa-bulb-fill"></i></button>
+    </div>
+</div>
