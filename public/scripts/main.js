@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     createNotePadButton.addEventListener('click', () => {
-        notePadName.value = '';
         getNotePad(notePadName.value.trim());
+        notePadName.value = '';
     });
 })
