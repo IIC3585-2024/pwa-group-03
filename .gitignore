@@ -1,0 +1,27 @@
+# Ignore template files
+*.template
+
+# Ignore compiled files
+*.class
+*.o
+*.pyc
+
+# Ignore build output
+/build
+/dist
+
+# Ignore dependency directories
+/node_modules
+/vendor
+
+# Ignore IDE and editor files
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+package-lock.json
