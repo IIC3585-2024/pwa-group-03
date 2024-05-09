@@ -1,9 +1,9 @@
-<div class="card w-full text-neutral-content">
+<div class="card w-full">
     <!-- Mitad superior -->
     <div class="grid card rounded-box place-items-center bg-blue-300">
         <label class="label cursor-pointer">
           <button class="btn btn-circle btn-outline">Pintar</button>
-          <input type="checkbox" class="checkbox" />
+          
         </label>
        
       <!-- Mitad interior -->
@@ -11,9 +11,20 @@
         <button class="btn btn-circle btn-outline">Mover</button>
         <button class="btn btn-circle btn-outline">Borrar</button>
         <button class="btn btn-circle btn-outline">Editar</button>
-        <button class="btn btn-circle btn-outline">Pintar</button>
+        
         <input type="checkbox" class="checkbox" />
         <span class="label-text">Nota</span> 
       </div>
     </div>  
   </div>
+
+<div class="grid card rounded-box place-items-center bg-blue-300">
+  <div class="note-header">
+    <div class="note-actions">
+        <button class="btn btn-circle btn-outline">Editar</button>
+        <button class="btn btn-circle btn-outline">Eliminar</button>
+        
+    </div>
+    </div>
+    <span class="label-text">${note.content}</span>
+</div>
