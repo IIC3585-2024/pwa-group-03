@@ -29,7 +29,10 @@ npm i
 ```bash
 npm run dev
 ```
-
+En caso de ejecutar en Windows, ejecutar el siguiente comando:
+```bash
+npm run dev:windows
+```
 
 ## Estilos
 Para estilizar se usan dos dependencias:

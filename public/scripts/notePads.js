@@ -39,10 +39,12 @@ function showNotes(notes) {
         const noteElement = document.createElement('div');
         noteElement.className = 'note';
         noteElement.innerHTML = `
-            <p>${note.content}</p>
-            <div class="note-actions">
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
+            <div class="note-actions shadow-2xl w-full">
+                <button class="edit btn-circle btn-outline">Edit</button>
+                <button class="delete btn-circle btn-outline">Delete</button>
+                <input type="checkbox" class="checkbox" />
+                <div class="divider divider-horizontal"></div>
+                <p>${note.content}</p>
             </div>
         `;
         const editButton = noteElement.querySelector('.edit');
