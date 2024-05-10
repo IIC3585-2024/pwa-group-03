@@ -91,7 +91,7 @@ function createNote(note, notePadName) {
 }
 
 
-function getNotes(notePadName) {
+function getNotes(notePadName, showNotes) {
     const request = openDb();
 
     request.onsuccess = (event) => {
@@ -111,27 +111,6 @@ function getNotes(notePadName) {
             console.log('Error al obtener las notas de la base de datos', event.target.error);
         }
     }
-}
-
-
-function showNotes(notes) {
-    const notesContainer = document.getElementById('notesContainer');
-    notesContainer.innerHTML = '';
-
-    notes.forEach(note => {
-        const noteElement = document.createElement('div');
-        noteElement.className = 'note';
-        noteElement.innerHTML = `
-            <div class="note-header">
-                <div class="note-actions">
-                    <button class="edit" onclick="editNoteModal(${note.id})">Editar</button>
-                    <button class="delete" onclick="deleteNoteModal(${note.id})">Eliminar</button>
-                </div>
-            </div>
-            <p>${note.content}</p>
-        `;
-        notesContainer.appendChild(noteElement);
-    });
 }
 
 

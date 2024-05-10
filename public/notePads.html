@@ -3,16 +3,17 @@
 <head>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="anonynote.json">
-    <title>About</title>
+    <title></title>
 </head>
 <body>
     <nav id="navbar"></nav>
     <div class="flex flex-col min-h-screen">
         <main class="flex flex-col gap-4 items-center flex-1 mt-10">
             <label id="notePadNameHolder" class="btn btn-ghost text-5xl"></label>
+            <button id="deleteAllButton" class="btn btn-error">Delete all</button>
             <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered w-full max-w-lg" />
-            <div id="notesContainer"></div>
             <button id="createNoteButton" class="btn btn-primary">Add note</button>
+            <div id="notesContainer"></div>
         </main>
     </div>
         
