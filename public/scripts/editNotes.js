@@ -1,4 +1,4 @@
-import { editNote, getNote } from './indexedDb.js';
+import { editNote, getNote, deleteNote } from './indexedDb.js';
 
 const params = new URLSearchParams(window.location.search);
 const notePadName = params.get('name');
@@ -23,8 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const deleteButton = document.getElementById('deleteNoteButton');
     deleteButton.addEventListener('click', () => {
-        deleteNote(noteId);
-        window.location.href = '/notePads.html?name=' + notePadName;
+        deleteNote(noteId, () => {
+            window.location.href = '/notePads.html?name=' + notePadName;
+        });
     });
 });
 

@@ -1214,6 +1214,9 @@ html {
   .btn-primary {
     --btn-color: var(--fallback-p);
   }
+  .btn-secondary {
+    --btn-color: var(--fallback-s);
+  }
   .btn-neutral {
     --btn-color: var(--fallback-n);
   }
@@ -1283,6 +1286,9 @@ html {
   .btn-primary {
     --btn-color: var(--p);
   }
+  .btn-secondary {
+    --btn-color: var(--s);
+  }
   .btn-neutral {
     --btn-color: var(--n);
   }
@@ -1295,6 +1301,11 @@ html {
   .btn-error {
     --btn-color: var(--er);
   }
+}
+.btn-secondary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-s,oklch(var(--s)/1));
 }
 .btn-neutral {
   --tw-text-opacity: 1;
@@ -2059,6 +2070,12 @@ html {
 .w-full {
   width: 100%;
 }
+.min-w-7 {
+  min-width: 1.75rem;
+}
+.min-w-full {
+  min-width: 100%;
+}
 .max-w-lg {
   max-width: 32rem;
 }
@@ -2096,6 +2113,16 @@ html {
 .bg-base-300 {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
+}
+.bg-primary\/50 {
+  background-color: var(--fallback-p,oklch(var(--p)/0.5));
+}
+.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
+}
+.fill-primary {
+  fill: var(--fallback-p,oklch(var(--p)/1));
 }
 .p-4 {
   padding: 1rem;

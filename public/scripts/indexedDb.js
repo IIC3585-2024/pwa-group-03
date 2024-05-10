@@ -148,7 +148,7 @@ function deleteNotes(notePadName) {
 }
 
 
-function deleteNote(noteId) {
+function deleteNote(noteId, next) {
     const request = openDb();
 
     request.onsuccess = (event) => {
@@ -159,6 +159,9 @@ function deleteNote(noteId) {
 
         deleteRequest.onsuccess = () => {
             console.log('Nota eliminada de la base de datos');
+            if (next) {
+                next();
+            }
         }
 
         deleteRequest.onerror = (event) => {
