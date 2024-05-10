@@ -11,14 +11,14 @@
         <main class="flex flex-col gap4 items-center flex-1 mt-10">
             <label id="notePadNameHolder" class="btn btn-ghost text-5xl"></label>
             <br>
-            <input id="noteContent" type="text" placeholder="Enter a notepad description" class="input w-11/12" />
+            <input id="noteDescription" type="text" placeholder="Enter a notepad description" class="input w-11/12" />
             <br>
             <div class="btn-group">
-                <button class="btn btn-active btn-neutral">Home</button>
-                <button class="btn btn-active btn-error">Delete all</button>
+                <a class="btn btn-active btn-neutral" href="index.html">Home</a>
+                <button id="deleteAllButton" class="btn btn-active btn-error">Delete all</button>
                 <button class="btn btn-active btn-warning">Sort</button>
                 <button class="btn btn-active btn-primary">Json</button>
-                <button class="btn btn-active btn-success">Refresh</button>
+                <button id="refreshButton" class="btn btn-active btn-success">Refresh</button>
             </div>
             <br>
             <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered w-full max-w-lg gap-4" />
@@ -30,5 +30,6 @@
         
     <footer id="footer" class="footer"></footer>
     <script type="module" src="scripts/notePads.js"></script>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 </html>

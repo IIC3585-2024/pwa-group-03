@@ -11,12 +11,12 @@
       <!-- Contenido principal -->
       <div class="min-h-screen">
         <main class="flex flex-col gap-4 items-center flex-1 mt-10">
-          <label class="btn btn-ghost text-5xl">Anonynote</label>
-          <input id="notePadName" type="text" placeholder="Type here" class="input input-bordered w-full max-w-lg gap-2" />
-          <button id="createNotePadButton" class="btn btn-primary" disabled>Go</button>
+          <div id="noteContent"></div>
           <div class="">
-          <label>Type a new or existing notepad name</label>
-        </div>
+            <button id="editNoteButton" class="btn btn-success">Save</button>
+            <button id="cancelEditNoteButton" class="btn btn-neutral">Cancel</button>
+            <button id="deleteNoteButton" class="btn btn-error">Delete</button>
+          </div>
       </main>
     </div>
 

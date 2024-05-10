@@ -113,27 +113,10 @@ function getNotes(notePadName, showNotes) {
     }
 }
 
-
-function showNotes(notes) {
-    const notesContainer = document.getElementById('notesContainer');
-    notesContainer.innerHTML = '';
-
-    notes.forEach(note => {
-        const noteElement = document.createElement('div');
-        noteElement.className = 'note';
-        noteElement.innerHTML = `
-        <div class="note-header">
-        <div class="place-items-center bg-blue-300 w-full rounded-box shadow-2xl">
-            <button class="btn btn-circle btn-outline" onclick="editNoteModal(${note.id})">Editar</button>
-            <button class="btn btn-circle btn-outline" onclick="deleteNoteModal(${note.id})">Eliminar</button>
-            <input type="checkbox" class="checkbox" />
-            <div class="divider divider-horizontal"></div>
-            <span class="label-text">${note.content}</span>
-        </div>
-        </div>
-        <br>
-        `;
-        notesContainer.appendChild(noteElement);
+function getNote(notePadName, noteId, showNote) {
+    getNotes(notePadName, (notes) => {
+        const note = notes.find(note => note.id === noteId);
+        showNote(note);
     });
 }
 
@@ -215,5 +198,6 @@ export {
     getNotes,
     deleteNotes,
     deleteNote,
-    editNote
+    editNote,
+    getNote
 }

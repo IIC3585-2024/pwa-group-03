@@ -28,6 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteNotes(notePadName);
         getNotes(notePadName, showNotes);
     });
+
+    const refreshButton = document.getElementById('refreshButton');
+    refreshButton.addEventListener('click', () => {
+        this.location.reload();
+    });
 });
 
 
@@ -40,7 +45,7 @@ function showNotes(notes) {
         noteElement.className = 'note';
         noteElement.innerHTML = `
             <div class="note-actions shadow-2xl w-full">
-                <button class="edit btn-circle btn-outline">Edit</button>
+                <button id="editButton" class="edit btn-circle btn-outline">Edit</button>
                 <button class="delete btn-circle btn-outline">Delete</button>
                 <input type="checkbox" class="checkbox" />
                 <div class="divider divider-horizontal"></div>
@@ -50,14 +55,17 @@ function showNotes(notes) {
         const editButton = noteElement.querySelector('.edit');
         const deleteButton = noteElement.querySelector('.delete');
 
+        // editButton.addEventListener('click', () => {
+        //     const newNoteContent = document.getElementById('noteContent');
+        //     const newNote = {
+        //         content: newNoteContent.value,
+        //     };
+        //     editNote(note.id, newNote);
+        //     newNoteContent.value = '';
+        //     getNotes(notePadName, showNotes);
+        // });
         editButton.addEventListener('click', () => {
-            const newNoteContent = document.getElementById('noteContent');
-            const newNote = {
-                content: newNoteContent.value,
-            };
-            editNote(note.id, newNote);
-            newNoteContent.value = '';
-            getNotes(notePadName, showNotes);
+            window.location.href = '/editNote.html?name=' + notePadName + 'id=' + note.id;
         });
         deleteButton.addEventListener('click', () => {
             deleteNote(note.id);
