@@ -24,4 +24,7 @@
 .DS_Store
 Thumbs.db
 
+# Ignore stylesheets
+/public/styles.css
+
 package-lock.json

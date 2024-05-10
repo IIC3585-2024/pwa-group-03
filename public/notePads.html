@@ -11,8 +11,20 @@
         <main class="flex flex-col gap4 items-center flex-1 mt-10">
             <label id="notePadNameHolder" class="btn btn-ghost text-5xl"></label>
             <br>
-            <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered w-full max-w-lg" />
-            <button id="createNoteButton" class="btn btn-primary">Add note</button>
+            <input id="noteContent" type="text" placeholder="Enter a notepad description" class="input input-bordered w-full" /><!-- max-w-lg -->
+            <br>
+            <div class="btn-group">
+                <button class="btn btn-active btn-neutral">Home</button>
+                <button class="btn btn-active btn-error">Delete</button>
+                <button class="btn btn-active btn-warning">Sort</button>
+                <button class="btn btn-active btn-primary">Json</button>
+                <button class="btn btn-active btn-success">Refresh</button>
+            </div>
+            <br>
+            <div class="w-full gap4">
+                <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered" /><!-- max-w-lg -->
+                <button id="createNoteButton" class="btn btn-primary">Add note</button>
+            </div>
             <br>
             <div id="notesContainer"></div>
         </main>

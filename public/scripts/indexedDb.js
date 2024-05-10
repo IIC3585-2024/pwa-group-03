@@ -122,8 +122,8 @@ function showNotes(notes) {
         const noteElement = document.createElement('div');
         noteElement.className = 'note';
         noteElement.innerHTML = `
-        <div class="card w-full">
-        <div class="grid card rounded-box place-items-center bg-blue-300">
+        <div class="card bg-blue-300">
+        <div class="grid card rounded-box place-items-center">
             <div class="note-header">
                 <div class="note-actions">
                     <button class="btn btn-circle btn-outline" onclick="editNoteModal(${note.id})">Editar</button>
