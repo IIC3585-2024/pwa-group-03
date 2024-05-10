@@ -91,7 +91,7 @@ function createNote(note, notePadName) {
 }
 
 
-function getNotes(notePadName) {
+function getNotes(notePadName, showNotes) {
     const request = openDb();
 
     request.onsuccess = (event) => {
