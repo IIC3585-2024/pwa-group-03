@@ -15,6 +15,14 @@ const registerSW = async () => {
     if ('serviceWorker' in navigator){
         try {
             await navigator.serviceWorker.register('./sw.js');
+            // Registro del servicio worker
+            const registration = await navigator.serviceWorker.register('./firebase-messaging-sw.js', {
+                updateViaCache: 'none'
+            });
+            // Obtención del token de registro para recibir notificaciones push
+            const token = await messaging.getToken({
+                serviceWorkerRegistration: registration
+            });
         } catch (error) {
             console.log('Failed to register service worker', error);
         }

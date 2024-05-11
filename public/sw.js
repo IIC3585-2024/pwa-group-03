@@ -85,3 +85,14 @@ async function networkAndCache(request) {
     }
 }
 
+// Función para recibir notificaciones
+navigator.serviceWorker.addEventListener('message', (event) => {
+    const { title, body } = event.data.notification;
+    console.log('Notification received:', { title, body });
+  
+    // Muestra la notificación al usuario
+    new Notification(title, { body });
+  });
+  
+  
+
