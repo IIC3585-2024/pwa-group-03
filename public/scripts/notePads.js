@@ -76,13 +76,14 @@ function showNotes(notes) {
             <button class="delete btn btn-xs btn-outline btn-error">Delete</button>
         </td>
         <td>
-            <input type="checkbox" class="checkbox" />
+            <input type="checkbox" class="checkbox" ${note.checked ? 'checked' : ''} />
         </td>
     `;
     
 
         const editButton = row.querySelector('.edit');
         const deleteButton = row.querySelector('.delete');
+        const checkbox = row.querySelector('.checkbox');
 
         editButton.addEventListener('click', () => {
             window.location.href = '/editNote.html?name=' + notePadName + '&id=' + note.id;
@@ -91,6 +92,10 @@ function showNotes(notes) {
         deleteButton.addEventListener('click', async () => {
             await deleteNote(note.id);
             await loadNotes(); 
+        });
+
+        checkbox.addEventListener('change', async () => {
+            await editNote(note.id, { checked: checkbox.checked });
         });
 
         notesTbody.appendChild(row);
