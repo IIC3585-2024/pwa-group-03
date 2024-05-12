@@ -16,7 +16,7 @@ const registerSW = async () => {
             await loadFirebase();
             await navigator.serviceWorker.register('./sw.js')
             // .then(() => {
-            //     const messaging = firebase.messaging();
+            //     const messaging = firebase.messaging()
             //     messaging.getToken()
             //     .then((currentToken) => {
             //         messaging.onMessage((payload) => {
