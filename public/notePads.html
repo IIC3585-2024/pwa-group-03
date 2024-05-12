@@ -11,7 +11,7 @@
         <main class="flex flex-col gap4 items-center flex-1 mt-10">
             <label id="notePadNameHolder" class="btn btn-ghost text-5xl"></label>
             <br>
-            <input id="noteDescription" type="text" placeholder="Enter a notepad description" class="input w-11/12" />
+            <textarea class="textarea textarea-bordered w-11/12" id="noteDescription"  placeholder="Enter a notepad description"></textarea>
             <br>
             <div class="btn-group">
                 <a class="btn btn-active btn-neutral" href="index.html">Home</a>
@@ -21,10 +21,29 @@
                 <button id="refreshButton" class="btn btn-active btn-success">Refresh</button>
             </div>
             <br>
-            <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered w-full max-w-lg gap-4" />
-            <button id="createNoteButton" class="btn btn-primary" disabled>Add note</button>
+            <div class="flex gap-2 items-center">
+                <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered w-full max-w-lg gap-4" />
+                <button id="createNoteButton" class="btn btn-primary" disabled>Add note</button>
+                <span id="charCount">0/200</span>
+            </div>
             <br>
-            <div id="notesContainer"></div>
+            <div class="overflow-x-auto w-full">
+                <table class="table w-full" id="notesContainer">
+                    <thead>
+                        <tr>
+                            <th class="w-1/2">Content</th> 
+                            <th class="w-1/6">Edit</th>   
+                            <th class="w-1/6">Delete</th>  
+                            <th class="w-1/6">Check</th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            
+            
+            
         </main>
     </div>
         
