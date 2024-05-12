@@ -10,6 +10,8 @@ const staticAssets = [
     './editNote.html',
     './styles.css',
     './scripts/main.js',
+    './scripts/loadFirebase.js',
+    './scripts/notePads.js',
     './icons/android-chrome-192x192.png',
     './icons/android-chrome-512x512.png',
     './components/navbar.html',
@@ -84,5 +86,13 @@ async function networkAndCache(request) {
         const cached = await cache.match(request);
         return cached;
     }
-}
+}  
 
+// Función para mostrar notificaciones
+self.addEventListener('message', (event) => {
+    const { title, body } = event.data.notification;
+    console.log('Notification received:', { title, body });
+  
+    // Muestra la notificación al usuario
+    new Notification(title, { body });
+  });
