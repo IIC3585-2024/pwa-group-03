@@ -1,6 +1,5 @@
-import {
-    getNotePad,
-} from './indexedDb.js';
+import { getNotePad } from './indexedDb.js';
+import { loadFirebase } from './loadFirebase.js';
 
 
 //  Este evento se ejecuta cuando la pagina se carga
@@ -14,14 +13,24 @@ window.addEventListener('load', () => {
 const registerSW = async () => {
     if ('serviceWorker' in navigator){
         try {
-            await navigator.serviceWorker.register('./sw.js');
-            // Registro del servicio worker
-            const registration = await navigator.serviceWorker.register('./firebase-messaging-sw.js', {
-                updateViaCache: 'none'
-            });
-            // Obtención del token de registro para recibir notificaciones push
-            const token = await messaging.getToken({
-                serviceWorkerRegistration: registration
+            await loadFirebase();
+            await navigator.serviceWorker.register('./sw.js')
+            // .then(() => {
+            //     const messaging = firebase.messaging();
+            //     messaging.getToken()
+            //     .then((currentToken) => {
+            //         messaging.onMessage((payload) => {
+            //             console.log('Notification received:', payload);
+            //             const notificationTitle = 'Conexión exitosa!';
+            //             const notificationOptions = {
+            //                 body: 'Background Message body.'
+            //             };
+            //             self.registration.showNotification(notificationTitle, notificationOptions);
+            //         });
+            //     })
+            // })
+            .then(() => {
+                console.log('Service worker registered');
             });
         } catch (error) {
             console.log('Failed to register service worker', error);
