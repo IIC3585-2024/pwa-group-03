@@ -53,6 +53,10 @@ async function getNotes(notepadId) {
         const notesRef = ref(database, 'notepads/' + notepadId);
         onValue(notesRef, async (snapshot) => {
             const data = await snapshot.val();
+            if (!data){
+                resolve([]);
+                return;
+            }
             const filteredData = Object.values(data).filter(item => item.hasOwnProperty('content'));
             resolve(filteredData);
         });
