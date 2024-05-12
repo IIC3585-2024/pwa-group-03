@@ -1,11 +1,15 @@
-import { getNotes, createNote, deleteNotes, deleteNote, editNote } from './indexedDb.js';
+// import { getNotes, createNote, deleteNotes, deleteNote, editNote } from './indexedDb.js';
+import RepositoryFactory from '../repositories/RepositoryFactory.js';
 
 const params = new URLSearchParams(window.location.search);
 const notePadName = params.get('name');
 
 async function loadNotes() {
     try {
-        const notes = await getNotes(notePadName);
+        const repo = RepositoryFactory.getRepository(); //*
+        const notes = await repo.getNotes(notePadName); //*
+        console.log(notes);
+        // const notes = await getNotes(notePadName);
         showNotes(notes);
     } catch (error) {
         console.error('Error loading notes:', error);
@@ -34,7 +38,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         const textLength = noteContent.value.length;
         
         charCount.innerHTML = `${textLength}/${maxLength}`;
-        console.log(textLength, maxLength);
         createNoteButton.disabled = textLength === 0 || textLength > maxLength;
 
     });
@@ -43,7 +46,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         const note = {
             content: noteContent.value,
         };
-        await createNote(note, notePadName);
+        // await createNote(note, notePadName);
+        const repo = RepositoryFactory.getRepository(); //*
+        await repo.createNote(note, notePadName); //*
         noteContent.value = '';
         await loadNotes();
         createNoteButton.disabled = true;
@@ -51,7 +56,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const deleteAllButton = document.getElementById('deleteAllButton');
     deleteAllButton.addEventListener('click', async () => {
-        await deleteNotes(notePadName);
+        // await deleteNotes(notePadName);
+        const repo = RepositoryFactory.getRepository(); //*
+        await repo.deleteNotes(notePadName); //*
         await loadNotes();
     });
 
@@ -85,11 +92,15 @@ function showNotes(notes) {
         const deleteButton = row.querySelector('.delete');
 
         editButton.addEventListener('click', () => {
-            window.location.href = '/editNote.html?name=' + notePadName + '&id=' + note.id;
+            const noteIdentificator = note.id ? note.id : note.content;
+            window.location.href = '/editNote.html?name=' + notePadName + '&id=' + noteIdentificator
         });
 
         deleteButton.addEventListener('click', async () => {
-            await deleteNote(note.id);
+            // await deleteNote(note.id);
+            const noteContent = note.id ? note.id : note.content;
+            const repo = RepositoryFactory.getRepository(); //*
+            await repo.deleteNote(noteContent, notePadName); //*
             await loadNotes(); 
         });
 
