@@ -1,4 +1,4 @@
-import { getNotes, createNote, deleteNotes, deleteNote, getNotePadObject, editNotePad } from './indexedDb.js';
+import { getNotes, createNote, deleteNotes, editNote, deleteNote, getNotePadObject, editNotePad } from './indexedDb.js';
 
 const params = new URLSearchParams(window.location.search);
 const notePadName = params.get('name');
