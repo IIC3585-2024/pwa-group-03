@@ -24,7 +24,6 @@ function openDb() {
     });
 }
 
-
 //                 GETS A NOTEPAD BY ITS NAME
 async function getNotePad(name) {
     try {
@@ -227,7 +226,7 @@ async function deleteNotes(notePadName) {
 
 
 //              DELETES A NOTE BY ITS ID
-async function deleteNote(noteId, next) {
+async function deleteNote(noteId) {
     try {
         const db = await openDb();
         const transaction = db.transaction('notes', 'readwrite');
@@ -236,9 +235,6 @@ async function deleteNote(noteId, next) {
 
         deleteRequest.onsuccess = () => {
             console.log('Nota eliminada de la base de datos');
-            if (next) {
-                next();
-            }
         };
 
         deleteRequest.onerror = (event) => {
@@ -287,17 +283,15 @@ async function editNote(noteId, newNote) {
     }
 }
 
-
-
-
 export {
+    createNotePad,
     getNotePad,
     getNotePadObject,
     editNotePad,
     createNote,
     getNotes,
+    getNote,
     deleteNotes,
     deleteNote,
-    editNote,
-    getNote
+    editNote
 }

@@ -758,6 +758,7 @@ html {
   --tw-content: attr(aria-label);
   content: var(--tw-content);
 }
+
 .card {
   position: relative;
   display: flex;
@@ -1552,6 +1553,7 @@ html {
     transform: scale(1);
   }
 }
+
 .card :where(figure:first-child) {
   overflow: hidden;
   border-start-start-radius: inherit;
@@ -1587,11 +1589,25 @@ html {
 .checkbox:focus {
   box-shadow: none;
 }
+.\!checkbox:focus-visible {
+  outline-style: solid !important;
+  outline-width: 2px !important;
+  outline-offset: 2px !important;
+  outline-color: var(--fallback-bc,oklch(var(--bc)/1)) !important;
+}
 .checkbox:focus-visible {
   outline-style: solid;
   outline-width: 2px;
   outline-offset: 2px;
   outline-color: var(--fallback-bc,oklch(var(--bc)/1));
+}
+.\!checkbox:disabled {
+  border-width: 0px !important;
+  cursor: not-allowed !important;
+  border-color: transparent !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity))) !important;
+  opacity: 0.2 !important;
 }
 .checkbox:disabled {
   border-width: 0px;
@@ -1600,6 +1616,23 @@ html {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
   opacity: 0.2;
+}
+.\!checkbox:checked,
+  .\!checkbox[aria-checked="true"] {
+  background-repeat: no-repeat !important;
+  animation: checkmark var(--animation-input, 0.2s) ease-out !important;
+  background-color: var(--chkbg) !important;
+  background-image: linear-gradient(-45deg, transparent 65%, var(--chkbg) 65.99%),
+      linear-gradient(45deg, transparent 75%, var(--chkbg) 75.99%),
+      linear-gradient(-45deg, var(--chkbg) 40%, transparent 40.99%),
+      linear-gradient(
+        45deg,
+        var(--chkbg) 30%,
+        var(--chkfg) 30.99%,
+        var(--chkfg) 40%,
+        transparent 40.99%
+      ),
+      linear-gradient(-45deg, var(--chkfg) 50%, var(--chkbg) 50.99%) !important;
 }
 .checkbox:checked,
   .checkbox[aria-checked="true"] {
@@ -1617,6 +1650,32 @@ html {
         transparent 40.99%
       ),
       linear-gradient(-45deg, var(--chkfg) 50%, var(--chkbg) 50.99%);
+}
+.\!checkbox:checked,
+  .\!checkbox[aria-checked="true"] {
+  background-repeat: no-repeat !important;
+  animation: checkmark var(--animation-input, 0.2s) ease-out !important;
+  background-color: var(--chkbg) !important;
+  background-image: linear-gradient(-45deg, transparent 65%, var(--chkbg) 65.99%),
+      linear-gradient(45deg, transparent 75%, var(--chkbg) 75.99%),
+      linear-gradient(-45deg, var(--chkbg) 40%, transparent 40.99%),
+      linear-gradient(
+        45deg,
+        var(--chkbg) 30%,
+        var(--chkfg) 30.99%,
+        var(--chkfg) 40%,
+        transparent 40.99%
+      ),
+      linear-gradient(-45deg, var(--chkfg) 50%, var(--chkbg) 50.99%) !important;
+}
+.\!checkbox:indeterminate {
+  --tw-bg-opacity: 1 !important;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity))) !important;
+  background-repeat: no-repeat !important;
+  animation: checkmark var(--animation-input, 0.2s) ease-out !important;
+  background-image: linear-gradient(90deg, transparent 80%, var(--chkbg) 80%),
+      linear-gradient(-90deg, transparent 80%, var(--chkbg) 80%),
+      linear-gradient(0deg, var(--chkbg) 43%, var(--chkfg) 43%, var(--chkfg) 57%, var(--chkbg) 57%) !important;
 }
 .checkbox:indeterminate {
   --tw-bg-opacity: 1;
@@ -2223,8 +2282,8 @@ html {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-.invisible {
-  visibility: hidden;
+.static {
+  position: static;
 }
 .z-\[1\] {
   z-index: 1;
@@ -2324,13 +2383,7 @@ html {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
 }
-.bg-blue-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
-}
-.p-1 {
-  padding: 0.25rem;
-}
+
 .p-4 {
   padding: 1rem;
 }

@@ -1,11 +1,15 @@
 import { getNotePad } from './indexedDb.js';
+
+import { SimulatedConnection } from './connection.js';
+import RepositoryFactory from '../repositories/RepositoryFactory.js';
 import { loadFirebase } from './loadFirebase.js';
 
 
 //  Este evento se ejecuta cuando la pagina se carga
 window.addEventListener('load', () => {
-    registerSW();
     loadComponents();
+    toggleOnlineOffline();
+    registerSW();
 })
 
 
@@ -24,16 +28,32 @@ const registerSW = async () => {
     }
 }
 
-// Funcion para actualizar el estado de la conexion (por ahora solo a nivel de texto)
+// Funcion para actualizar el estado de la conexion 
 function toggleOnlineOffline() {
-    const checkbox = document.getElementById('status-checkbox');  
-    const statusText = document.getElementById('status-text');  
-    function updateStatus() {
-        statusText.textContent = checkbox.checked ? 'online' : 'offline';
+    const checkbox = document.getElementById('status-checkbox');
+    const statusText = document.getElementById('status-text');
+
+    if (!checkbox || !statusText) {
+        console.warn('Elementos no disponibles, reintentando...');
+        setTimeout(toggleOnlineOffline, 100);
+        return;
     }
-    checkbox.addEventListener('change', updateStatus);
+
+    function updateStatus() {
+        const isConnected = SimulatedConnection.isConnected;
+        statusText.textContent = isConnected ? 'online' : 'offline';
+        checkbox.checked = isConnected;
+    }
+
+    checkbox.addEventListener('change', () => {
+        SimulatedConnection.isConnected = checkbox.checked;
+    });
+
+    window.addEventListener('connectionChanged', updateStatus);
+
     updateStatus();
 }
+
 
 // Funcion para mostrar notificaciones
 function notificationButton() {
@@ -86,27 +106,27 @@ function showPosition(position) {
     }, 10000);
 }
 
+
 // Funcion para renderizar componentes que se repiten en diferntes vistas (navbar y footer)
 const components = ['navbar', 'footer'];
 async function loadComponent(component, id) {
     const element = document.getElementById(id);
-    await fetch(`./components/${component}.html`)
-    .then(response => response.text())
-    .then(html => {
-        element.innerHTML = html;
-        // me dejo de funcionar el toggle y esto lo soluciono jeje.
-        if (component === 'navbar') {
-            toggleOnlineOffline();
-            notificationButton();
-            surpriseButton();
-        }
-    });
+    const response = await fetch(`./components/${component}.html`);
+    const html = await response.text();
+    element.innerHTML = html;
+    if (component === 'navbar') {
+        toggleOnlineOffline();  
+        notificationButton();
+        surpriseButton();
+    }
 }
+
 const loadComponents = async () => {
-    components.forEach(component => {
-        loadComponent(component, component);
-    });
+    for (const component of components) {
+        await loadComponent(component, component);
+    }
 }
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -118,7 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     createNotePadButton.addEventListener('click', () => {
-        getNotePad(notePadName.value.trim());
+        // getNotePad(notePadName.value.trim());
+        const repo = RepositoryFactory.getRepository(); //*
+        repo.createNotepad(notePadName.value.trim()); //*
         notePadName.value = '';
     });
 })
