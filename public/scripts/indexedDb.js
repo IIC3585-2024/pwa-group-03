@@ -73,6 +73,68 @@ async function createNotePad(notePad) {
 }
 
 
+async function getNotePadObject(name) {
+    try {
+        const db = await openDb();
+        const transaction = db.transaction('notePads', 'readonly');
+        const store = transaction.objectStore('notePads');
+        const getRequest = store.get(name);
+
+        return new Promise((resolve, reject) => {
+            getRequest.onsuccess = (event) => {
+                const notePad = event.target.result;
+                console.log('Block de notas obtenido de la base de datos', notePad);
+                resolve(notePad);
+            };
+
+            getRequest.onerror = (event) => {
+                console.log('Error al obtener el block de notas de la base de datos', event.target.error);
+                reject(null);
+            };
+        });
+    } catch (error) {
+        console.error('Error opening DB:', error);
+        return null;
+    }
+}
+
+
+async function editNotePad(name, newNotePad) {
+    try {
+        const db = await openDb();
+        const transaction = db.transaction('notePads', 'readwrite');
+        const store = transaction.objectStore('notePads');
+        const getRequest = store.get(name);
+
+        getRequest.onsuccess = async (event) => {
+            const notePad = event.target.result;
+            console.log(event.target);
+
+            if (notePad) {
+                const updatedNotePad = { ...notePad, ...newNotePad };
+                console.log("Updated notePad:", updatedNotePad);
+
+                const updateRequest = store.put(updatedNotePad);
+                updateRequest.onsuccess = () => {
+                    console.log(`Block de notas editado correctamente`);
+                };
+                updateRequest.onerror = (event) => {
+                    console.log('Error al actualizar el block de notas', event.target.error);
+                };
+            } else {
+                console.log('No se encontró el block de notas para editar');
+            }
+        };
+
+        getRequest.onerror = (event) => {
+            console.log('Error al obtener el block de notas de la base de datos', event.target.error);
+        };
+    } catch (error) {
+        console.error('Error opening DB:', error);
+    }
+}
+
+
 //              ADDS A NOTE TO A NOTEPAD
 async function createNote(note, notePadName) {
     try {
@@ -224,6 +286,8 @@ async function editNote(noteId, newNote) {
 export {
     createNotePad,
     getNotePad,
+    getNotePadObject,
+    editNotePad,
     createNote,
     getNotes,
     getNote,

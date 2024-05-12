@@ -1,8 +1,20 @@
 // import { getNotes, createNote, deleteNotes, deleteNote, editNote } from './indexedDb.js';
 import RepositoryFactory from '../repositories/RepositoryFactory.js';
 
+
 const params = new URLSearchParams(window.location.search);
 const notePadName = params.get('name');
+
+
+async function loadNotePadObject(name) {
+    try {
+        const notePad = await getNotePadObject(name);
+        return notePad;
+    } catch (error) {
+        console.error('Error getting notePad:', error);
+    }
+}
+
 
 async function loadNotes() {
     try {
@@ -23,6 +35,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const tittle = document.querySelector('title');
     tittle.textContent = notePadName;
+
+    const notePadObject = await loadNotePadObject(notePadName);
+    const notePadDescription = document.getElementById('notePadDescription');
+    notePadDescription.value = notePadObject.description;
 
     await loadNotes(); 
 
@@ -68,6 +84,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 });
 
+notePadDescription.addEventListener('blur', async () => {
+    const notePad = await getNotePadObject(notePadName);
+    notePad.description = notePadDescription.value;
+    await editNotePad(notePadName, notePad);
+});
+
+
 function showNotes(notes) {
     const notesTbody = document.querySelector('#notesContainer tbody');
     notesTbody.innerHTML = ''; 
@@ -83,13 +106,14 @@ function showNotes(notes) {
             <button class="delete btn btn-xs btn-outline btn-error">Delete</button>
         </td>
         <td>
-            <input type="checkbox" class="checkbox" />
+            <input type="checkbox" class="checkbox" ${note.checked ? 'checked' : ''} />
         </td>
     `;
     
 
         const editButton = row.querySelector('.edit');
         const deleteButton = row.querySelector('.delete');
+        const checkbox = row.querySelector('.checkbox');
 
         editButton.addEventListener('click', () => {
             const noteIdentificator = note.id ? note.id : note.content;
@@ -102,6 +126,10 @@ function showNotes(notes) {
             const repo = RepositoryFactory.getRepository(); //*
             await repo.deleteNote(noteContent, notePadName); //*
             await loadNotes(); 
+        });
+
+        checkbox.addEventListener('change', async () => {
+            await editNote(note.id, { checked: checkbox.checked });
         });
 
         notesTbody.appendChild(row);
