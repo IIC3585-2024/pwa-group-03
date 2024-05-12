@@ -2,7 +2,8 @@ import { getNotePad } from './indexedDb.js';
 
 import { SimulatedConnection } from './connection.js';
 import RepositoryFactory from '../repositories/RepositoryFactory.js';
-import { loadFirebase } from './loadFirebase.js';
+// import { loadFirebase } from './loadFirebase.js';
+import { loadFirebase } from './firebaseDb.js';
 
 
 //  Este evento se ejecuta cuando la pagina se carga

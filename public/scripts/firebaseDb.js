@@ -19,6 +19,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+const loadFirebase = async () => {
+    initializeApp(firebaseConfig);
+}
 const database = getDatabase(app);  // Obtener la instancia de la base de datos al momento de la inicialización
 
 // A continuacion se definen las funciones para un CRUD basico.
@@ -62,6 +66,10 @@ async function getNote(notepadId, noteId) {
         const notesRef = ref(database, 'notepads/' + notepadId + '/' + noteId);
         onValue(notesRef, async (snapshot) => {
             const data = await snapshot.val();
+            if (!data){
+                resolve([]);
+                return;
+            }
             resolve(data.content)
         });
     });
@@ -96,4 +104,4 @@ async function editNote(notepadId, noteId, notepadName) {
     return update(ref(database), updates);
 }
 
-export { getNotepad, addNotepad, getNotes, getNote, addNote, deleteNote, deleteNotes, editNote};
+export { getNotepad, addNotepad, getNotes, getNote, addNote, deleteNote, deleteNotes, editNote, loadFirebase};

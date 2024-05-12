@@ -620,34 +620,6 @@ html {
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
 }
-.alert {
-  display: grid;
-  width: 100%;
-  grid-auto-flow: row;
-  align-content: flex-start;
-  align-items: center;
-  justify-items: center;
-  gap: 1rem;
-  text-align: center;
-  border-radius: var(--rounded-box, 1rem);
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-  padding: 1rem;
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
-  --alert-bg: var(--fallback-b2,oklch(var(--b2)/1));
-  --alert-bg-mix: var(--fallback-b1,oklch(var(--b1)/1));
-  background-color: var(--alert-bg);
-}
-@media (min-width: 640px) {
-  .alert {
-    grid-auto-flow: column;
-    grid-template-columns: auto minmax(auto,1fr);
-    justify-items: start;
-    text-align: start;
-  }
-}
 .avatar.placeholder > div {
   display: flex;
   align-items: center;
@@ -758,49 +730,20 @@ html {
   --tw-content: attr(aria-label);
   content: var(--tw-content);
 }
-
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--rounded-box, 1rem);
-}
-.card:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-.card figure {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.card.image-full {
-  display: grid;
-}
-.card.image-full:before {
-  position: relative;
-  content: "";
-  z-index: 10;
-  border-radius: var(--rounded-box, 1rem);
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
-  opacity: 0.75;
-}
-.card.image-full:before,
-    .card.image-full > * {
-  grid-column-start: 1;
-  grid-row-start: 1;
-}
-.card.image-full > figure img {
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.card.image-full > .card-body {
-  position: relative;
-  z-index: 20;
-  --tw-text-opacity: 1;
-  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
+.\!checkbox {
+  flex-shrink: 0 !important;
+  --chkbg: var(--fallback-bc,oklch(var(--bc)/1)) !important;
+  --chkfg: var(--fallback-b1,oklch(var(--b1)/1)) !important;
+  height: 1.5rem !important;
+  width: 1.5rem !important;
+  cursor: pointer !important;
+  -webkit-appearance: none !important;
+     -moz-appearance: none !important;
+          appearance: none !important;
+  border-radius: var(--rounded-btn, 0.5rem) !important;
+  border-width: 1px !important;
+  border-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-border-opacity))) !important;
+  --tw-border-opacity: 0.2 !important;
 }
 .checkbox {
   flex-shrink: 0;
@@ -1317,9 +1260,23 @@ html {
   .btn-primary {
     --btn-color: var(--fallback-p);
   }
+  .btn-secondary {
+    --btn-color: var(--fallback-s);
+  }
   .btn-accent {
     --btn-color: var(--fallback-a);
-
+  }
+  .btn-neutral {
+    --btn-color: var(--fallback-n);
+  }
+  .btn-success {
+    --btn-color: var(--fallback-su);
+  }
+  .btn-warning {
+    --btn-color: var(--fallback-wa);
+  }
+  .btn-error {
+    --btn-color: var(--fallback-er);
   }
 }
 @supports (color: color-mix(in oklab, black, black)) {
@@ -1381,6 +1338,9 @@ html {
   .btn-secondary {
     --btn-color: var(--s);
   }
+  .btn-accent {
+    --btn-color: var(--a);
+  }
   .btn-neutral {
     --btn-color: var(--n);
   }
@@ -1398,6 +1358,11 @@ html {
   --tw-text-opacity: 1;
   color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
   outline-color: var(--fallback-s,oklch(var(--s)/1));
+}
+.btn-accent {
+  --tw-text-opacity: 1;
+  color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-a,oklch(var(--a)/1));
 }
 .btn-neutral {
   --tw-text-opacity: 1;
@@ -1553,38 +1518,8 @@ html {
     transform: scale(1);
   }
 }
-
-.card :where(figure:first-child) {
-  overflow: hidden;
-  border-start-start-radius: inherit;
-  border-start-end-radius: inherit;
-  border-end-start-radius: unset;
-  border-end-end-radius: unset;
-}
-.card :where(figure:last-child) {
-  overflow: hidden;
-  border-start-start-radius: unset;
-  border-start-end-radius: unset;
-  border-end-start-radius: inherit;
-  border-end-end-radius: inherit;
-}
-.card:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-.card.bordered {
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
-}
-.card.compact .card-body {
-  padding: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.card.image-full :where(figure) {
-  overflow: hidden;
-  border-radius: inherit;
+.\!checkbox:focus {
+  box-shadow: none !important;
 }
 .checkbox:focus {
   box-shadow: none;
@@ -2282,6 +2217,9 @@ html {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.invisible {
+  visibility: hidden;
+}
 .static {
   position: static;
 }
@@ -2300,7 +2238,6 @@ html {
 .flex {
   display: flex;
 }
-
 .table {
   display: table;
 }
@@ -2343,9 +2280,6 @@ html {
 .flex-col {
   flex-direction: column;
 }
-.place-items-center {
-  place-items: center;
-}
 .items-center {
   align-items: center;
 }
@@ -2383,7 +2317,9 @@ html {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
 }
-
+.p-1 {
+  padding: 0.25rem;
+}
 .p-4 {
   padding: 1rem;
 }
@@ -2399,14 +2335,14 @@ html {
   --tw-text-opacity: 1;
   color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
-.text-neutral-content {
-  --tw-text-opacity: 1;
-  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
-}
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);

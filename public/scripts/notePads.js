@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     const tittle = document.querySelector('title');
     tittle.textContent = notePadName;
 
-    const notePadObject = await loadNotePadObject(notePadName);
-    const notePadDescription = document.getElementById('notePadDescription');
-    notePadDescription.value = notePadObject.description;
+    // const notePadObject = await loadNotePadObject(notePadName);
+    // const notePadDescription = document.getElementById('notePadDescription');
+    // notePadDescription.value = notePadObject.description;
 
     await loadNotes(); 
 
@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 });
 
-notePadDescription.addEventListener('blur', async () => {
-    const notePad = await getNotePadObject(notePadName);
-    notePad.description = notePadDescription.value;
-    await editNotePad(notePadName, notePad);
-});
+// notePadDescription.addEventListener('blur', async () => {
+//     const notePad = await getNotePadObject(notePadName);
+//     notePad.description = notePadDescription.value;
+//     await editNotePad(notePadName, notePad);
+// });
 
 
 function showNotes(notes) {
