@@ -1,95 +1,99 @@
 import { getNotes, createNote, deleteNotes, deleteNote, editNote } from './indexedDb.js';
 
-
 const params = new URLSearchParams(window.location.search);
 const notePadName = params.get('name');
 
-document.addEventListener('DOMContentLoaded', function() {
+async function loadNotes() {
+    try {
+        const notes = await getNotes(notePadName);
+        showNotes(notes);
+    } catch (error) {
+        console.error('Error loading notes:', error);
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', async function() {
     const notePadNameHolder = document.getElementById('notePadNameHolder');
     notePadNameHolder.textContent = notePadName;
+
     const tittle = document.querySelector('title');
     tittle.textContent = notePadName;
 
-    getNotes(notePadName, showNotes);
+    await loadNotes(); 
 
     const noteContent = document.getElementById('noteContent');
     const createNoteButton = document.getElementById('createNoteButton');
 
+
+    const charCount = document.getElementById('charCount');
+    const maxLength = 200;
     noteContent.addEventListener('input', (event) => {
         createNoteButton.disabled = !event.target.value;
+
+        const textLength = noteContent.value.length;
+        
+        charCount.innerHTML = `${textLength}/${maxLength}`;
+        console.log(textLength, maxLength);
+        createNoteButton.disabled = textLength === 0 || textLength > maxLength;
+
     });
 
-    createNoteButton.addEventListener('click', () => {
+    createNoteButton.addEventListener('click', async () => {
         const note = {
             content: noteContent.value,
         };
-        createNote(note, notePadName);
+        await createNote(note, notePadName);
         noteContent.value = '';
-        getNotes(notePadName, showNotes);
+        await loadNotes();
         createNoteButton.disabled = true;
     });
 
     const deleteAllButton = document.getElementById('deleteAllButton');
-    deleteAllButton.addEventListener('click', () => {
-        deleteNotes(notePadName);
-        getNotes(notePadName, showNotes);
+    deleteAllButton.addEventListener('click', async () => {
+        await deleteNotes(notePadName);
+        await loadNotes();
     });
 
     const refreshButton = document.getElementById('refreshButton');
     refreshButton.addEventListener('click', () => {
-        this.location.reload();
+        location.reload();
     });
 });
 
-
 function showNotes(notes) {
-    const notesContainer = document.getElementById('notesContainer');
-    notesContainer.innerHTML = '';
+    const notesTbody = document.querySelector('#notesContainer tbody');
+    notesTbody.innerHTML = ''; 
 
     notes.forEach(note => {
-        const noteElement = document.createElement('div');
-        noteElement.className = 'note';
-        noteElement.innerHTML = `
-            <div class="note-actions shadow-2xl min-w-full">
-                <p>${note.content}</p>
-                <div class="buttons">
-                    <button class="edit btn-circle btn-outline btn-secondary">Edit</button>
-                    <button class="delete btn-circle btn-outline btn-error">Delete</button>
-                    <input type="checkbox" class="checkbox" />
-                </div>
-                <div class="divider divider-horizontal"></div>
-            </div>
-        `;
-        const editButton = noteElement.querySelector('.edit');
-        const deleteButton = noteElement.querySelector('.delete');
-        const checkedNote = noteElement.querySelector('.checkbox');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td class="truncate text-ellipsis">${note.content}</td>
+        <td>
+            <button class="edit btn btn-xs btn-outline btn-secondary">Edit</button>
+        </td>
+        <td>
+            <button class="delete btn btn-xs btn-outline btn-error">Delete</button>
+        </td>
+        <td>
+            <input type="checkbox" class="checkbox" />
+        </td>
+    `;
+    
 
-        // editButton.addEventListener('click', () => {
-        //     const newNoteContent = document.getElementById('noteContent');
-        //     const newNote = {
-        //         content: newNoteContent.value,
-        //     };
-        //     editNote(note.id, newNote);
-        //     newNoteContent.value = '';
-        //     getNotes(notePadName, showNotes);
-        // });
+        const editButton = row.querySelector('.edit');
+        const deleteButton = row.querySelector('.delete');
+
         editButton.addEventListener('click', () => {
             window.location.href = '/editNote.html?name=' + notePadName + '&id=' + note.id;
         });
-        deleteButton.addEventListener('click', () => {
-            deleteNote(note.id);
-            getNotes(notePadName, showNotes);
-        });
-        checkedNote.addEventListener('change', () => {
-            if (checkedNote.checked) {
-                // set random color
-                noteElement.style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-            }
-            else {
-                noteElement.style.backgroundColor = '#fff';
-            }
+
+        deleteButton.addEventListener('click', async () => {
+            await deleteNote(note.id);
+            await loadNotes(); 
         });
 
-        notesContainer.appendChild(noteElement);
+        notesTbody.appendChild(row);
     });
 }
+
