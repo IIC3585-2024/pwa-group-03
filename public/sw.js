@@ -7,6 +7,7 @@ const staticAssets = [
     './index.html',
     './about.html',
     './notePads.html',
+    './editNote.html',
     './styles.css',
     './scripts/main.js',
     './scripts/loadFirebase.js',
