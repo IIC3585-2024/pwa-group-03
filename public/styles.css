@@ -1238,6 +1238,9 @@ html {
   .btn-primary {
     --btn-color: var(--fallback-p);
   }
+  .btn-accent {
+    --btn-color: var(--fallback-a);
+  }
 }
 @supports (color: color-mix(in oklab, black, black)) {
   .btn-outline.btn-primary.btn-active {
@@ -1283,6 +1286,14 @@ html {
   .btn-primary {
     --btn-color: var(--p);
   }
+  .btn-accent {
+    --btn-color: var(--a);
+  }
+}
+.btn-accent {
+  --tw-text-opacity: 1;
+  color: var(--fallback-ac,oklch(var(--ac)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-a,oklch(var(--a)/1));
 }
 .btn.glass {
   --tw-shadow: 0 0 #0000;

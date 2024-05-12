@@ -15,20 +15,6 @@ const registerSW = async () => {
         try {
             await loadFirebase();
             await navigator.serviceWorker.register('./sw.js')
-            // .then(() => {
-            //     const messaging = firebase.messaging()
-            //     messaging.getToken()
-            //     .then((currentToken) => {
-            //         messaging.onMessage((payload) => {
-            //             console.log('Notification received:', payload);
-            //             const notificationTitle = 'Conexión exitosa!';
-            //             const notificationOptions = {
-            //                 body: 'Background Message body.'
-            //             };
-            //             self.registration.showNotification(notificationTitle, notificationOptions);
-            //         });
-            //     })
-            // })
             .then(() => {
                 console.log('Service worker registered');
             });
@@ -49,6 +35,19 @@ function toggleOnlineOffline() {
     updateStatus();
 }
 
+// Funcion para mostrar notificaciones
+function notificationButton() {
+    const notificationButton = document.getElementById('notificationButton');
+    notificationButton.addEventListener('click', () => {
+        Notification.requestPermission().then((result) => {
+            if (result === 'granted') {
+                new Notification('Se han activado las notificaciones');
+                notificationButton.classList.remove('btn-ghost');
+            }
+        });
+    });
+}
+
 // Funcion para renderizar componentes que se repiten en diferntes vistas (navbar y footer)
 const components = ['navbar', 'footer'];
 async function loadComponent(component, id) {
@@ -60,6 +59,7 @@ async function loadComponent(component, id) {
         // me dejo de funcionar el toggle y esto lo soluciono jeje.
         if (component === 'navbar') {
             toggleOnlineOffline();
+            notificationButton();
         }
     });
 }

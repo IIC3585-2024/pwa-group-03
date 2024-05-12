@@ -10,7 +10,6 @@ const staticAssets = [
     './styles.css',
     './scripts/main.js',
     './scripts/loadFirebase.js',
-    './scripts/notifications.js',
     './scripts/notePads.js',
     './icons/android-chrome-192x192.png',
     './icons/android-chrome-512x512.png',
