@@ -1,18 +1,19 @@
-import { editNote, getNote, deleteNote } from './indexedDb.js';
+import { editNote, getNote } from './indexedDb.js';
 
 const params = new URLSearchParams(window.location.search);
 const notePadName = params.get('name');
 const noteId = params.get('id');
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     const noteContent = document.getElementById('noteContent');
     noteContent.className = 'input input-bordered w-full max-w-xs';
-    noteContent.innerHTML = getNote(notePadName, noteId, showNote);
-
+    const previousValue = await getNote(notePadName, noteId);
+    noteContent.value = previousValue
+    
     const editButton = document.getElementById('editNoteButton');
-    editButton.addEventListener('click', () => {
-        const newNoteContent = document.getElementById('noteContent');
-        editNote(noteId, newNoteContent);
+    editButton.addEventListener('click', async () => {
+        const newNoteContent = document.getElementById('noteContent').value;
+        await editNote(noteId, { content: newNoteContent });
         window.location.href = '/notePads.html?name=' + notePadName;
     });
 
@@ -20,15 +21,5 @@ document.addEventListener('DOMContentLoaded', function() {
     cancelButton.addEventListener('click', () => {
         window.location.href = '/notePads.html?name=' + notePadName;
     });
-
-    const deleteButton = document.getElementById('deleteNoteButton');
-    deleteButton.addEventListener('click', () => {
-        deleteNote(noteId, () => {
-            window.location.href = '/notePads.html?name=' + notePadName;
-        });
-    });
 });
 
-function showNote(note) {
-    return note.content;
-}
