@@ -1,7 +1,18 @@
-import { getNotes, createNote, deleteNotes, deleteNote, editNote } from './indexedDb.js';
+import { getNotes, createNote, deleteNotes, deleteNote, getNotePadObject, editNotePad } from './indexedDb.js';
 
 const params = new URLSearchParams(window.location.search);
 const notePadName = params.get('name');
+
+
+async function loadNotePadObject(name) {
+    try {
+        const notePad = await getNotePadObject(name);
+        return notePad;
+    } catch (error) {
+        console.error('Error getting notePad:', error);
+    }
+}
+
 
 async function loadNotes() {
     try {
@@ -19,6 +30,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const tittle = document.querySelector('title');
     tittle.textContent = notePadName;
+
+    const notePadObject = await loadNotePadObject(notePadName);
+    const notePadDescription = document.getElementById('notePadDescription');
+    notePadDescription.value = notePadObject.description;
 
     await loadNotes(); 
 
@@ -60,6 +75,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         location.reload();
     });
 });
+
+notePadDescription.addEventListener('blur', async () => {
+    const notePad = await getNotePadObject(notePadName);
+    notePad.description = notePadDescription.value;
+    await editNotePad(notePadName, notePad);
+});
+
 
 function showNotes(notes) {
     const notesTbody = document.querySelector('#notesContainer tbody');
