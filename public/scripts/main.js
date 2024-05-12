@@ -1,6 +1,4 @@
-import {
-    getNotePad,
-} from './indexedDb.js';
+import { getNotePad } from './indexedDb.js';
 
 
 //  Este evento se ejecuta cuando la pagina se carga

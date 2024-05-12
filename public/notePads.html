@@ -3,20 +3,52 @@
 <head>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="anonynote.json">
-    <title>About</title>
+    <title></title>
 </head>
 <body>
     <nav id="navbar"></nav>
     <div class="flex flex-col min-h-screen">
-        <main class="flex flex-col gap-4 items-center flex-1 mt-10">
+        <main class="flex flex-col gap4 items-center flex-1 mt-10">
             <label id="notePadNameHolder" class="btn btn-ghost text-5xl"></label>
-            <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered w-full max-w-lg" />
-            <div id="notesContainer"></div>
-            <button id="createNoteButton" class="btn btn-primary">Add note</button>
+            <br>
+            <textarea class="textarea textarea-bordered w-11/12" id="noteDescription"  placeholder="Enter a notepad description"></textarea>
+            <br>
+            <div class="btn-group">
+                <a class="btn btn-active btn-neutral" href="index.html">Home</a>
+                <button id="deleteAllButton" class="btn btn-active btn-error">Delete all</button>
+                <button class="btn btn-active btn-warning">Sort</button>
+                <button class="btn btn-active btn-primary">Json</button>
+                <button id="refreshButton" class="btn btn-active btn-success">Refresh</button>
+            </div>
+            <br>
+            <div class="flex gap-2 items-center">
+                <input id="noteContent" type="text" placeholder="Enter a short note" class="input input-bordered w-full max-w-lg gap-4" />
+                <button id="createNoteButton" class="btn btn-primary" disabled>Add note</button>
+                <span id="charCount">0/200</span>
+            </div>
+            <br>
+            <div class="overflow-x-auto w-full">
+                <table class="table w-full" id="notesContainer">
+                    <thead>
+                        <tr>
+                            <th class="w-1/2">Content</th> 
+                            <th class="w-1/6">Edit</th>   
+                            <th class="w-1/6">Delete</th>  
+                            <th class="w-1/6">Check</th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            
+            
+            
         </main>
     </div>
         
     <footer id="footer" class="footer"></footer>
     <script type="module" src="scripts/notePads.js"></script>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
