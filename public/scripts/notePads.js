@@ -82,6 +82,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     refreshButton.addEventListener('click', () => {
         location.reload();
     });
+
+    const jsonButton = document.getElementById('jsonButton');
+    jsonButton.addEventListener('click', async () => {
+        new Notification('JSON Button', { body: 'Boton no implementado' });
+    });
+
+    const sortButton = document.getElementById('sortButton');
+    sortButton.addEventListener('click', async () => {
+        new Notification('Sort Button', { body: 'Boton no implementado' });
+    });
 });
 
 // notePadDescription.addEventListener('blur', async () => {
@@ -98,7 +108,7 @@ function showNotes(notes) {
     notes.forEach(note => {
         const row = document.createElement('tr');
         row.innerHTML = `
-        <td class="truncate text-ellipsis">${note.content}</td>
+        <textarea class="truncate text-ellipsis w-full">${note.content}</textarea>
         <td>
             <button class="edit btn btn-xs btn-outline btn-secondary">Edit</button>
         </td>

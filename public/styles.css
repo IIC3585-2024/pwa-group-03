@@ -2244,6 +2244,9 @@ html {
 .h-5 {
   height: 1.25rem;
 }
+.h-screen {
+  height: 100vh;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -2277,11 +2280,17 @@ html {
 .cursor-pointer {
   cursor: pointer;
 }
+.list-disc {
+  list-style-type: disc;
+}
 .flex-col {
   flex-direction: column;
 }
 .items-center {
   align-items: center;
+}
+.justify-normal {
+  justify-content: normal;
 }
 .justify-end {
   justify-content: flex-end;
@@ -2320,8 +2329,17 @@ html {
 .p-1 {
   padding: 0.25rem;
 }
+.p-10 {
+  padding: 2.5rem;
+}
 .p-4 {
   padding: 1rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.text-center {
+  text-align: center;
 }
 .text-3xl {
   font-size: 1.875rem;
